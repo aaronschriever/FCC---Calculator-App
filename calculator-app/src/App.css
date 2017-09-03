@@ -1,0 +1,55 @@
+.App {
+  text-align: center; }
+
+body {
+  background-color: #36558F; }
+
+.calculator {
+  border-radius: 0.3em;
+  padding-top: 5px;
+  max-width: 15em;
+  margin: auto;
+  background-color: #333;
+  box-shadow: inset 0px 2px 7px 1px #111; }
+
+.calc-display {
+  background-color: #cccccc;
+  padding-top: 20px;
+  padding-right: 10px;
+  margin: 20px 20px 10px 20px;
+  height: 2em;
+  font-size: 2em;
+  font-family: "Orbitron", sans-serif, sans-serif;
+  text-align: right;
+  border-radius: 0.3em;
+  overflow: hidden; }
+
+.number-pad {
+  box-shadow: inset 0px -1px 7px 1px #111;
+  padding: 10px;
+  background-color: #cccccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em; }
+
+.buttonRow {
+  display: flex;
+  flex-direction: row; }
+
+.calc-button {
+  margin: 4px;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  vertical-align: super;
+  font-family: "Orbitron", sans-serif;
+  background-color: #323031;
+  color: #f4faff;
+  width: 2em;
+  height: 2em;
+  border-radius: 0.3em; }
+  .calc-button .doublwidth {
+    width: 4em; }
+  .calc-button .charDiv {
+    padding-top: 5px; }

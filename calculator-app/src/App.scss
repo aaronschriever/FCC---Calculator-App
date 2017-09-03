@@ -1,0 +1,68 @@
+.App {
+  text-align: center;
+}
+
+
+$button-font: 'Orbitron', sans-serif;
+$body-color: #36558F;
+$button-color: rgb(50, 48, 49);
+$text-color: rgb(244, 250, 255);
+$pad-color: rgb(204,204,204);
+$global-border-radius: 0.3em;
+body{
+  background-color: $body-color;
+}
+.calculator {
+  border-radius: $global-border-radius;
+  
+  padding-top: 5px;
+  max-width: 15em;
+  margin: auto;
+  background-color: #333;
+  box-shadow: inset 0px 2px 7px 1px #111;
+}
+.calc-display{
+  background-color: $pad-color;
+  padding-top: 20px;
+  padding-right: 10px;
+  margin: 20px 20px 10px 20px;
+  height: 2em;
+  font-size: 2em;
+  font-family: $button-font, sans-serif;
+  text-align: right;
+  border-radius: $global-border-radius;
+  overflow: hidden;
+}
+.number-pad {
+  box-shadow: inset 0px -1px 7px 1px #111;
+  padding: 10px;
+  background-color: $pad-color;
+   display: flex;
+   flex-direction: column;
+  // flex-flow: row wrap;
+  justify-content: space-between;
+  border-bottom-left-radius:$global-border-radius;
+  border-bottom-right-radius: $global-border-radius
+}
+.buttonRow{
+  display: flex;
+  flex-direction: row;
+}
+.calc-button {
+  margin: 4px;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  vertical-align: super;
+  font-family: $button-font;
+  background-color: $button-color;
+  color: $text-color;
+  width: 2em;
+  height: 2em;
+  border-radius: $global-border-radius;
+  .doublwidth {
+    width: 4em;
+  }
+  .charDiv {
+    padding-top: 5px;
+  }
+}

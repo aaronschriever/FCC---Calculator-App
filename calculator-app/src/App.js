@@ -26,7 +26,7 @@ class Calculator extends React.Component {
      
   }
   changeCalcArray(element) {
-  this.setState(...this.state.calcArray.concat (element));
+  this.setState(this.state.calcArray.concat (element));
 }
   changeLHS(equationLHS) {
     this.setState({equationLHS: equationLHS});
@@ -140,8 +140,9 @@ function CalcDisplay(props) {
 class CalcButton extends React.Component {
   constructor(props){
     super(props);
-    this.handleCalculation.bind(this);
-    this.handleDisplayInput.bind(this);
+    this.handleCalculation = this.handleCalculation.bind(this);
+    this.handleDisplayInput = this.handleDisplayInput.bind(this);
+    
   }
   handleCalculation(e){
     this.props.changeCalcArray(this.props.character);
@@ -205,7 +206,7 @@ class CalcButton extends React.Component {
   render(){
   return (
     
-    <div className="calc-button" onClick={this.handleDisplayInput.bind(this)} >
+    <div className="calc-button" onClick={ (event) => {this.handleDisplayInput(event); this.handleCalculation(event) }} >
       <div className="charDiv">
         {this.props.character}
       </div>

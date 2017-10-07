@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 import React from 'react';
 
 import './App.css';
@@ -13,18 +14,21 @@ function checkIfZero(currentDisplay){
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { display: 0, equationLHS: 0, equationRHS: 0, operator: ""  };
+    this.state = {calcArray: [], display: 0, equationLHS: 0, equationRHS: 0, operator: ""  };
     this.changeDisplay=this.changeDisplay.bind(this);
-    this.changeCalc=this.changeCalc.bind(this);
+    this.changeLHS=this.changeLHS.bind(this);
     this.changOperator=this.changOperator.bind(this);
+    this.changeCalcArray=this.changeCalcArray.bind(this);
   }
 
   changeDisplay(display) {
      this.setState({display: display});
      
   }
-
-  changeCalc(equationLHS) {
+  changeCalcArray(element) {
+  this.setState(...this.state.calcArray.concat (element));
+}
+  changeLHS(equationLHS) {
     this.setState({equationLHS: equationLHS});
     console.log("LHS: " + equationLHS);
   }
@@ -32,17 +36,18 @@ class Calculator extends React.Component {
     this.setState({operator: operator});
     console.log("operator: " + operator);
   }
+  calculate(equationLHS, operator, equationRHS){
+
+  }
   render() {
     return (
       <div className="calculator">
-        <CalcDisplay display={this.state.display} />
+        <CalcDisplay display={this.state.display}/>
         <NumberPad display={this.state.display}
         changeDisplay={this.changeDisplay}
-        changeCalc={this.changeCalc}
+        changeLHS={this.changeLHS}
         changOperator={this.changOperator}
-        //operator={this.state.operator}
-
-      
+        changeCalcArray={this.changeCalcArray}
         />
 
       </div>
@@ -60,59 +65,64 @@ class NumberPad extends React.Component {
           <CalcButton 
            equationLHS={this.props.equationLHS}
            operator={this.props.operator} 
-           display={this.props.display} 
+           display={this.props.display}
+           changeCalcArray={this.props.changeCalcArray} 
            changeDisplay={this.props.changeDisplay} 
-           changeCalc ={this.props.changeCalc}
+           changeLHS ={this.props.changeLHS}
            changOperator = {this.props.changOperator}
            character="MC" />
           <CalcButton 
            equationLHS={this.props.equationLHS}
            operator={this.props.operator} 
            display={this.props.display} 
+           changeCalcArray={this.props.changeCalcArray}
            changeDisplay={this.props.changeDisplay}
-           changeCalc ={this.props.changeCalc}
+           changeLHS ={this.props.changeLHS}
            changOperator = {this.props.changOperator}
            character="+/-" />
           <CalcButton
            equationLHS={this.props.equationLHS}
            operator={this.props.operator} 
            display={this.props.display} 
+           changeCalcArray={this.props.changeCalcArray}
            changeDisplay={this.props.changeDisplay} 
-           changeCalc ={this.props.changeCalc}
+           changeLHS ={this.props.changeLHS}
            changOperator = {this.props.changOperator}
            character="<-" />
           <CalcButton
           ton equationLHS={this.props.equationLHS}
            operator={this.props.operator} 
            display={this.props.display} 
+           changeCalcArray={this.props.changeCalcArray}
            changeDisplay={this.props.changeDisplay}
-           changeCalc ={this.props.changeCalc} 
+           changeLHS ={this.props.changeLHS} 
            character="C" />
         </div>
    
        <div className="buttonRow">
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="7" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="8" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="9" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} changOperator = {this.props.changOperator} character="&divide;" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="7" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="8" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="9" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} changOperator = {this.props.changOperator} character="&divide;" />
+          
         </div>
         <div className="buttonRow">
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="4" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="5" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="6" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} changOperator = {this.props.changOperator} character="&times;" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="4" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="5" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="6" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} changOperator = {this.props.changOperator} character="&times;" />
         </div>
         <div className="buttonRow">
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="1" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="2" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="3" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} changOperator = {this.props.changOperator} character="-" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="1" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="2" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="3" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} changOperator = {this.props.changOperator} character="-" />
         </div>
         <div className="buttonRow">
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="0" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="." />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} character="=" />
-          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeDisplay={this.props.changeDisplay} changeCalc ={this.props.changeCalc} changOperator = {this.props.changOperator} character="+" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="0" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="." />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} character="=" />
+          <CalcButton equationLHS={this.props.equationLHS} operator={this.props.operator} display={this.props.display} changeCalcArray={this.props.changeCalcArray} changeDisplay={this.props.changeDisplay} changeLHS ={this.props.changeLHS} changOperator = {this.props.changOperator} character="+" />
         </div>
       </div>
     );
@@ -128,11 +138,18 @@ function CalcDisplay(props) {
 }
 
 class CalcButton extends React.Component {
-  
-  
+  constructor(props){
+    super(props);
+    this.handleCalculation.bind(this);
+    this.handleDisplayInput.bind(this);
+  }
+  handleCalculation(e){
+    this.props.changeCalcArray(this.props.character);
+  }
   
   handleDisplayInput(e) {
-    //console.log(e.target);
+    console.log(e.target);
+    console.log(this.props);
     console.log(this.props.display.length);
     let display = this.props.display;
     let operator= '';
@@ -160,10 +177,14 @@ class CalcButton extends React.Component {
       console.log("operator: " + this.props.character);
       equationLHS = this.props.display;
       operator = this.props.character;
-      this.props.changeCalc(equationLHS);
-      display = '';
+      this.props.changeLHS(equationLHS);
+      display = '0';
+      this.props.changOperator(operator);
       break;
+      case "=":
 
+
+      break;
       default:
       if (this.props.display.length < 2 && checkIfZero(this.props.display)){
         display = this.props.character;
